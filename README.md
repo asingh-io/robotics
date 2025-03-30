@@ -6,6 +6,8 @@
 To fix the cloned VM has the same IP follow
 
 '''
-echo -n > /etc/machine-id
-rm /var/lib/dbus/machine-id
+sudo hostnamectl set-hostname <new-hostname>
+
+sudo echo -n > /etc/machine-id
+sudo rm /var/lib/dbus/machine-id
 '''
