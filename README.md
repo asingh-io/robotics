@@ -15,8 +15,8 @@ sudo rm /var/lib/dbus/machine-id
 ### git setting
 
 ```
-git config --global pull.rebase true
-git config --global pull.ff false  
+git config --global pull.rebase false
+git config --global pull.ff true
 git config --global user.name  "Anand Singh"
 git config --global user.email  "asingh.sqm@gmail.com"
 ```
@@ -29,22 +29,22 @@ git config --global user.email  "asingh.sqm@gmail.com"
     {
         "key" : "ctrl+shift+l",
         "command" : "workbench.action.tasks.runTask",
-        "args": "Run on robot"
+        "args": "Run-on-my-robot"
     },
     {
         "key" : "ctrl+alt+l",
         "command" : "workbench.action.tasks.runTask",
-        "args": "Run on any robot"
+        "args": "Run-on-any-robot"
     },
     {
-        "key" : "ctrl+shift+9",
+        "key" : "ctrl+shift+r",
         "command" : "workbench.action.tasks.runTask",
-        "args": "Run master_program.py on robot"
+        "args": "Run-master_program-on-my-robot"
     },
     {
-        "key" : "ctrl+alt+9",
+        "key" : "ctrl+alt+r",
         "command" : "workbench.action.tasks.runTask",
-        "args": "Run master_program.py on any robot"
+        "args": "Run-master_program-on-any-robot"
     }
 ]
 ```
