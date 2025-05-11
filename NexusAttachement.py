@@ -3,16 +3,16 @@ from pybricks.parameters import Port, Direction
 from pybricks.robotics import DriveBase
 from pybricks.parameters import Stop, Color, Button
 from pybricks.tools import wait
-from TurtleConstant import *
-from TurtleHelper import *
+from NexusConstant import *
+from NexusHelper import *
 
 
-class TurtleAttachment:
+class NexusAttachement:
     def __init__(self, ENABLE_GYRO=True, ENABLE_LOGS=False):
-        self.left = Motor(Port.C)
-        self.right = Motor(Port.D)
+        self.left = Motor(Port.B)
+        self.right = Motor(Port.A)
 
-    async def move_C_angle(
+    async def move_left_async(
         self,
         angle=0,
         speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE,
@@ -24,7 +24,7 @@ class TurtleAttachment:
         await self.left.run_angle(speed, angle, then, wait)
         # print("Left Speed = {}".format(self.left.speed()))
 
-    def move_C_angle_sync(
+    def move_left(
         self,
         angle=0,
         speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE,
@@ -32,11 +32,11 @@ class TurtleAttachment:
         wait=True,
     ):
         speed = get_speed_mmsec(speed_percentage)
-        # print("Left Speed = {}".format(self.left.speed()))
+        print("Left Speed = {}".format(self.left.speed()))
         self.left.run_angle(speed, angle, then, wait)
         # print("Left Speed = {}".format(self.left.speed()))
 
-    def move_C_time(
+    def move_left_time(
         self, speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE, time_millisec=500
     ):
         speed = get_speed_mmsec(speed_percentage)
@@ -45,7 +45,7 @@ class TurtleAttachment:
         self.left.stop()
         self.left.reset_angle(0)
 
-    async def move_D_angle(
+    async def move_right_angle_async(
         self,
         angle=0,
         speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE,
@@ -55,7 +55,7 @@ class TurtleAttachment:
         speed = get_speed_mmsec(speed_percentage)
         await self.right.run_angle(speed, angle, then, wait)
 
-    async def move_D_angle_sync(
+    def move_right(
         self,
         angle=0,
         speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE,
@@ -63,9 +63,10 @@ class TurtleAttachment:
         wait=True,
     ):
         speed = get_speed_mmsec(speed_percentage)
-        await self.right.run_angle(speed, angle, then, wait)
+        print("Right Speed = {}".format(self.right.speed()))
+        self.right.run_angle(speed, angle, then, wait)
 
-    def move_D_time(
+    def move_right_time(
         self, speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE, time_millisec=500
     ):
         speed = get_speed_mmsec(speed_percentage)
@@ -75,13 +76,13 @@ class TurtleAttachment:
         self.right.stop()
         self.right.reset_angle(0)
 
-    def run_D_until_stalled(
+    def run_right_until_stalled(
         self, speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE, duty_limit=50
     ):
         speed = get_speed_mmsec(speed_percentage)
         self.right.run_until_stalled(speed, duty_limit, then=Stop.HOLD)
 
-    async def run_C_until_stalled(
+    async def run_left_until_stalled(
         self, speed_percentage=DEFAULT_ATTACHEMNET_SPEED_PERCENTAGE, duty_limit=50
     ):
         speed = get_speed_mmsec(speed_percentage)
