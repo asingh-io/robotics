@@ -2,4 +2,4 @@
 	ff = true
 	rebase = false
 [commit]
-    allowEmssss
+    allowEmptyMessage = true
