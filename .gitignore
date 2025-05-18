@@ -4,5 +4,5 @@
 desktop.ini
 __pycache__
 !/.gitignore
-.gitconfig
+!/.gitconfig
 robotName.sh
