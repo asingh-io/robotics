@@ -1,1 +1,1 @@
-export robotName="Jolly"
+export robotName="Walle"
