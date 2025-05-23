@@ -25,17 +25,6 @@ def run_mission(robo, arm):
     robo.straight_drive(-80)
     robo.pivot_turn(120)
     
-
-    #
-    #
-    #
-    #)
-    
-
-  
-    # robo.brake()
-
-
 if __name__ == "__main__":
     robo = NexusDrive()
     arm = NexusAttachement()

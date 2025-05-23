@@ -8,7 +8,7 @@ from NexusHelper import *
 
 
 class NexusDrive:
-    def __init__(self, ENABLE_GYRO=False, ENABLE_LOGS=False):
+    def __init__(self, ENABLE_GYRO=True, ENABLE_LOGS=False):
         # Initialize both motors. In this example, the motor on the
         # left must turn counterclockwise to make the robot go forward.
         self.left_motor = Motor(Port.C)
@@ -22,6 +22,7 @@ class NexusDrive:
             wheel_diameter=WHEEL_DIAMETER,
             axle_track=AXLE_TRACK,
         )
+        print("using Gyro=",ENABLE_GYRO)
         self.use_gyro(ENABLE_GYRO)
         self.set_speed_percentage()
 
