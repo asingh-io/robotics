@@ -25,7 +25,7 @@ class NexusDrive:
         print("using Gyro=", ENABLE_GYRO)
         self.use_gyro(ENABLE_GYRO)
         self.set_speed_percentage()
-        self.reset(0, 0)
+        # self.reset(0, 0)
 
         # add color sensor
         # TODO:
@@ -43,7 +43,7 @@ class NexusDrive:
         self.drive_base.brake()
 
     def log(self, enable=True):
-        self.log_enabled = enable
+        self.loging_enabled = enable
 
     def use_gyro(self, enable=True):
         self.drive_base.use_gyro(enable)
@@ -55,12 +55,12 @@ class NexusDrive:
     def drive(self, distance=0, wait=True):
         print("drive=", distance)
         self.drive_base.straight(distance, then=Stop.BRAKE, wait=wait)
-        data_logging()
+        # data_logging()
 
     async def async_drive(self, distance=0, wait=True):
         print("async: drive=", distance)
         await self.drive_base.straight(distance, then=Stop.BRAKE, wait=wait)
-        data_logging()
+        # data_logging()
 
     def keep_drive(self, speed, turn_rate, time_millis):
         self.drive_base.drive(speed, turn_rate)
@@ -73,18 +73,16 @@ class NexusDrive:
     """
 
     def pivot_turn(self, angle, wait=True):
-        self.drive_base.turn(angle, then=Stop.HOLD, wait=wait) 
-        data_logging()
-
+        self.drive_base.turn(angle, then=Stop.HOLD, wait=wait)
+        # data_logging()
 
     def curve_trun(self, radius, angle, wait=True):
         self.drive_base.arc(radius, angle, then=Stop.HOLD, wait=wait)
-        data_logging()
-
+        # data_logging()
 
     def get_speed_raw(self):
         settings = self.drive_base.settings()
-        if self.log_enabled:
+        if self.loging_enabled:
             print(
                 "speed={}, accel={}, turn_speed={} turn_accel={}".format(
                     settings[0], settings[1], settings[2], settings[3]
@@ -116,7 +114,7 @@ class NexusDrive:
         acceleration = get_acceleration_mmsec2(acceleration_percentage)
         turn_rate = get_turn_rate_degsec(turn_rate_percentage)
         turn_acceleration = get_turn_acceleration_degsec2(turn_acceleration_percentage)
-        if self.log_enabled:
+        if self.loging_enabled:
             print("\tset speed {}% = {} mm/sec".format(speed_percentage, speed))
             print(
                 "\tset accel {}% = {} mm/sec2".format(
