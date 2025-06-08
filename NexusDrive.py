@@ -57,7 +57,7 @@ class NexusDrive:
         self.drive_base.straight(distance, then=Stop.BRAKE, wait=wait)
         # data_logging()
 
-    async def async_drive(self, distance=0, wait=True):
+    async def drive_async(self, distance=0, wait=True):
         print("async: drive=", distance)
         await self.drive_base.straight(distance, then=Stop.BRAKE, wait=wait)
         # data_logging()

@@ -24,6 +24,8 @@ def run_mission(robo, arm):
     arm.move_right(-170)
     robo.drive(-80)
     robo.pivot_turn(-60)
+    robo.drive(-660)
+
     
 if __name__ == "__main__":
     robo = NexusDrive()
