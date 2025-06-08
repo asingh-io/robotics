@@ -1,8 +1,9 @@
 from pybricks.pupdevices import Motor
-from pybricks.parameters import Port, Direction
+from pybricks.parameters import Port, Direction, Axis
 from pybricks.robotics import DriveBase
 from pybricks.parameters import Stop, Color, Button
-from pybricks.tools import wait, multitask, run_task
+from pybricks.tools import wait, multitask, run_task, StopWatch
+from pybricks.hubs import PrimeHub
 from NexusConstant import *
 from NexusHelper import *
 
@@ -13,7 +14,7 @@ class NexusDrive:
         # left must turn counterclockwise to make the robot go forward.
         self.left_motor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
         self.right_motor = Motor(Port.D)
-        self.loging_enabled = ENABLE_LOGING
+        self.logs_enabled = ENABLE_LOGING
         # Initialize the drive base. In this example, the wheel diameter is 56mm.
         # The distance between the two wheel-ground contact points is 112mm.
         self.drive_base = DriveBase(
@@ -25,16 +26,73 @@ class NexusDrive:
         print("using Gyro=", ENABLE_GYRO)
         self.use_gyro(ENABLE_GYRO)
         self.set_speed_percentage()
-        # self.reset(0, 0)
 
-        # add color sensor
-        # TODO:
-        # self.e_color=ColorSensor(Port.E)
-        # self.f_color=ColorSensor(Port.F)
+        self.hub = PrimeHub()
+        self.watch = StopWatch()
+        self.watch.reset()
+        self.log_data(f"Init Done")
 
-    def data_logging():
-        if loging_enabled:
-            print(self.state)
+    def log_data(self, note=""):
+        if not self.logs_enabled:
+            return
+
+        time_now = self.watch.time()
+        angle_l = self.left_motor.angle()
+        angle_r = self.right_motor.angle()
+
+        # Access the IMU data for yaw (angle around the Z-axis)
+        yaw = self.hub.imu.heading()
+        #print("Yaw Angle:", yaw)
+
+        # Access the angular velocity (rate of rotation) around the Z-axis
+        yaw_rate = self.hub.imu.angular_velocity(Axis.Z)
+        #print("Yaw Rate:", yaw_rate)
+
+        #print(
+        #   f"{time_now}, Yaw: {yaw}, Rate: {yaw_rate}, Note: {note}"
+        #)
+        print(
+           f"{time_now}, L: {angle_l:.1f}°, R: {angle_r:.1f}°, Yaw: {yaw}, Rate: {yaw_rate}, Note: {note}"
+        )
+        """
+        log_entry = (
+        f"{time_now}ms, "
+        f"L: {dist_l:.1f}mm, R: {dist_r:.1f}mm, "
+        f"Yaw: {yaw}, YawRate: {yaw_rate}, "
+        f"Radius: {'Straight' if turning_radius == float('inf') else f'{turning_radius:.1f}mm'}, "
+        f"Note: {note}"
+        )
+        self.logs.append(log_entry)
+        self.logs.append({
+        "time_ms": time_now,
+        "dist_l_mm": round(dist_l, 1),
+        "dist_r_mm": round(dist_r, 1),
+        "yaw_deg": yaw,
+        "yaw_rate_dps": yaw_rate,
+        "radius_mm": None if turning_radius == float('inf') else round(turning_radius, 1),
+        "note": note
+    })
+        """
+
+    """
+    def export_logs(self):
+        print("=== ROBOT LOG START ===")
+        for entry in self.logs:
+            print(entry)
+        print("=== ROBOT LOG END ===")
+    def export_logs(self):
+        print("time_ms,dist_l_mm,dist_r_mm,yaw_deg,yaw_rate_dps,radius_mm,note")
+        for entry in self.logs:
+            print("{},{},{},{},{},{},{}".format(
+                entry["time_ms"],
+                entry["dist_l_mm"],
+                entry["dist_r_mm"],
+                entry["yaw_deg"] if entry["yaw_deg"] is not None else "",
+                entry["yaw_rate_dps"] if entry["yaw_rate_dps"] is not None else "",
+                entry["radius_mm"] if entry["radius_mm"] is not None else "Straight",
+                entry["note"]
+            ))
+    """
 
     def stop(self):
         self.drive_base.stop()
@@ -43,7 +101,7 @@ class NexusDrive:
         self.drive_base.brake()
 
     def log(self, enable=True):
-        self.loging_enabled = enable
+        self.logs_enabled = enable
 
     def use_gyro(self, enable=True):
         self.drive_base.use_gyro(enable)
@@ -53,9 +111,9 @@ class NexusDrive:
     """
 
     def drive(self, distance=0, wait=True):
-        print("drive=", distance)
+        self.log_data(f"drive {distance}mm")
         self.drive_base.straight(distance, then=Stop.BRAKE, wait=wait)
-        # data_logging()
+        self.log_data(f"drive {distance}mm")
 
     async def async_drive(self, distance=0, wait=True):
         print("async: drive=", distance)
@@ -82,7 +140,7 @@ class NexusDrive:
 
     def get_speed_raw(self):
         settings = self.drive_base.settings()
-        if self.loging_enabled:
+        if self.logs_enabled:
             print(
                 "speed={}, accel={}, turn_speed={} turn_accel={}".format(
                     settings[0], settings[1], settings[2], settings[3]
@@ -114,7 +172,7 @@ class NexusDrive:
         acceleration = get_acceleration_mmsec2(acceleration_percentage)
         turn_rate = get_turn_rate_degsec(turn_rate_percentage)
         turn_acceleration = get_turn_acceleration_degsec2(turn_acceleration_percentage)
-        if self.loging_enabled:
+        if self.logs_enabled:
             print("\tset speed {}% = {} mm/sec".format(speed_percentage, speed))
             print(
                 "\tset accel {}% = {} mm/sec2".format(
