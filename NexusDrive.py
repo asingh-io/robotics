@@ -131,11 +131,15 @@ class NexusDrive:
     """
 
     def pivot_turn(self, angle, wait=True):
+        self.log_data(f"pivot_turn {angle}mm")
         self.drive_base.turn(angle, then=Stop.HOLD, wait=wait)
+        self.log_data(f"pivot_turn {angle}mm")
         # data_logging()
 
     def curve_trun(self, radius, angle, wait=True):
+        self.log_data(f"curve_trun {angle}mm")
         self.drive_base.arc(radius, angle, then=Stop.HOLD, wait=wait)
+        self.log_data(f"curve_trun {angle}mm")
         # data_logging()
 
     def get_speed_raw(self):

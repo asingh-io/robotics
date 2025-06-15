@@ -2,6 +2,20 @@ from NexusDrive import *
 from NexusAttachement import *
 
 
+from NexusDrive import *
+from NexusAttachement import *
+
+
+async def run_mission(robo, arm):
+    await robo.drive_async(250)
+    
+    
+if __name__ == "__main__":
+    robo = NexusDrive(ENABLE_LOGING=True)
+    arm = NexusAttachement()
+    run_task(run_mission(robo, arm))
+
+""""
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Direction, Port
 from pybricks.robotics import DriveBase
@@ -30,3 +44,4 @@ async def main():
 # multitask(drive_base.turn(90), move_gripper())
 # Runs the main program from start to finish.
 run_task(main())
+"""
