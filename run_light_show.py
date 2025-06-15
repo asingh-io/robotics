@@ -7,19 +7,19 @@ def move_to_light_show(robo, arm):
     robo.pivot_turn(-94)
     robo.drive(610)
     robo.pivot_turn(91)
-    robo.drive(49)
+    robo.drive(60)
     robo.pivot_turn(5)
 
 
 async def run_mission(robo, arm):
     print("test")
-    await multitask(arm.move_left_async(-200), arm.move_right_async(200))
+    await multitask(arm.move_left_async(-195), arm.move_right_async(195))
 
 def go_back_to_home(robo, arm): 
     robo.pivot_turn(-5)
     robo.drive(-50)
     robo.pivot_turn(-91)
-    robo.drive(-610)
+    robo.drive(-680)
     robo.pivot_turn(94)
     robo.drive(-250)
 
