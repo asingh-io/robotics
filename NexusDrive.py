@@ -9,7 +9,7 @@ from NexusHelper import *
 
 
 class NexusDrive:
-    def __init__(self, ENABLE_GYRO=True, ENABLE_LOGING=False):
+    def __init__(self, ENABLE_GYRO=False, ENABLE_LOGING=False):
         # Initialize both motors. In this example, the motor on the
         # left must turn counterclockwise to make the robot go forward.
         self.left_motor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
