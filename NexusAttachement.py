@@ -9,8 +9,8 @@ from NexusHelper import *
 
 class NexusAttachement:
     def __init__(self, ENABLE_GYRO=True, ENABLE_LOGS=False):
-        self.left = Motor(Port.B)
-        self.right = Motor(Port.A)
+        self.left = Motor(Port.F)
+        self.right = Motor(Port.E)
 
     async def move_left_async(
         self,
