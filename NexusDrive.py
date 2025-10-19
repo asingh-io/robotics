@@ -47,6 +47,7 @@ class NexusDrive:
         # Access the angular velocity (rate of rotation) around the Z-axis
         yaw_rate = self.hub.imu.angular_velocity(Axis.Z)
         #print("Yaw Rate:", yaw_rate)
+        print(time_now,angle_l, angle_r, yaw, yaw_rate)
 
         #print(
         #   f"{time_now}, Yaw: {yaw}, Rate: {yaw_rate}, Note: {note}"

@@ -18,9 +18,7 @@ def run_mission(robo, arm):
     robo.straight_drive(15)
     arm.move_left(250)
     arm.move_left(-250)
-    
-    
-    
+
     robo.brake()
 
 
