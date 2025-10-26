@@ -4,8 +4,9 @@ from NexusAttachement import *
 
 def run_mission(robo, arm):
 
-    robo.drive(-600)
-    robo.arm.move_left(-100)
+    robo.drive(-620)
+    robo.arm_move_left(10)
+    robo.drive_turn(-90)
 
     """
     robo.set_speed_percentage(speed_percentage=50)
