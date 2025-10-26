@@ -12,11 +12,17 @@
     "task.allowAutomaticTasks": "on",
     "git.postCommitCommand": "sync",
     "security.workspace.trust.enabled": false,
+    // Python global configuration
+    "python.defaultInterpreterPath": ".venv/bin/python",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "black",
+    // Editor behavior
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80
+    ],
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true
     },
-    "editor.rulers": [
-        80
-    ]
 }
