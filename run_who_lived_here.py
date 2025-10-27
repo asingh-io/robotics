@@ -4,7 +4,7 @@ from NexusAttachement import *
 
 def run_mission(robo, arm):
 
-    robo.drive(-610)
+    robo.drive(-600)
     arm.move_left(-22)
     robo.pivot_turn(-90)
 
