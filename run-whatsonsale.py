@@ -25,7 +25,7 @@ def run_mission(robo, arm):
     arm.move_left(50)
     arm.move_left(-250)
     arm.move_left(50)
-    
+
     """
     
     robo.drive(80)
